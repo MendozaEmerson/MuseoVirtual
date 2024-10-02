@@ -7,10 +7,21 @@
 
 import SwiftUI
 
+struct User {
+    var username: String
+    var password: String
+    var name: String
+    var lastname: String
+    //var age: Int
+    var email: String
+}
+
 @main
 struct LoginApp: App {
     
     @State var isLogginedin: Bool = false
+    @State var users: [User] = [] // Array para almacenar los usuarios creados
+    
     var body: some Scene {
         WindowGroup {
             //ContentView()
@@ -19,7 +30,7 @@ struct LoginApp: App {
                 
                 HomeView(isLogginedin: $isLogginedin)
             }else{
-                LoginView(isLogginedin: $isLogginedin)
+                LoginView(isLogginedin: $isLogginedin, users: $users)
             }
         }
     }

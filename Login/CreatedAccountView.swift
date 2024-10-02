@@ -15,6 +15,8 @@ struct CreatedAccountView: View {
     @State private var lastname = ""
     @State private var age = ""
     @State private var email = ""
+    @Binding var users: [User]
+    @State private var accountCreated = false
     
     var body: some View {
         VStack{
@@ -50,15 +52,26 @@ struct CreatedAccountView: View {
                 .textFieldStyle(.roundedBorder)
             
             Button(action: {
-                print("Cuenta creada")
-            }){
-              Text("Crear Cuenta")
-                    .font(.headline)
-                    .padding()
-                    
+                            // Validar y crear un nuevo usuario
+                
+                                let newUser = User(username: username, password: password, name: name, lastname: lastname, email: email)
+                                users.append(newUser) // Añadir el nuevo usuario al array
+                                print("Cuenta creada para \(username)")
+                print(users[0])
+                                
+                                accountCreated = true
+                
+                        }) {
+                            Text("Crear Cuenta")
+                                .font(.headline)
+                                .padding()
             }
             .padding(.horizontal)
             .buttonStyle(.borderedProminent)
+            
+            NavigationLink(destination:LoginView(isLogginedin:.constant(false), users: $users), isActive: $accountCreated) {
+                            EmptyView() // No queremos mostrar ningún texto
+            }
         }
     }
 }

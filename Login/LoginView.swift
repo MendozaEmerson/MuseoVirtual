@@ -13,6 +13,8 @@ struct LoginView: View {
     @State private var password = ""
     @Binding var isLogginedin: Bool
     
+    @Binding var users: [User]
+    
     var body: some View {
         NavigationView{
             VStack{
@@ -33,7 +35,7 @@ struct LoginView: View {
                 Button("Login", action: btnLogin)
                     .buttonStyle(.borderedProminent)
                                         
-                NavigationLink(destination: CreatedAccountView()){
+                NavigationLink(destination: CreatedAccountView(users: $users)){
                     Text("Create my account")
                 }
                     .navigationTitle("Login")
@@ -47,7 +49,16 @@ struct LoginView: View {
     }
     
     func btnLogin() {
-        isLogginedin = true
+            // Verificar si el usuario y la contraseña coinciden con algún usuario registrado
+            if let _ = users.first(where: { $0.username == username && $0.password == password }) {
+                print(users[0])
+                print(username)
+                
+                isLogginedin = true
+                
+            } else {
+                print("Usuario o contraseña incorrectos")
+            }
     }
 }
 
