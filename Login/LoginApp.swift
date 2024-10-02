@@ -14,8 +14,10 @@ struct LoginApp: App {
     var body: some Scene {
         WindowGroup {
             //ContentView()
+            
             if isLogginedin {
-                HomeView()
+                
+                HomeView(isLogginedin: $isLogginedin)
             }else{
                 LoginView(isLogginedin: $isLogginedin)
             }

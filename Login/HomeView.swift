@@ -8,8 +8,27 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @Binding var isLogginedin: Bool
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Bienvenido al Inicio")
+                .font(.largeTitle)
+                .padding()
+
+            // Botón de Logout
+            Button("Logout") {
+                btnLogout()
+            }
+            .buttonStyle(.borderedProminent)
+            .padding()
+        }
+    }
+    
+    func btnLogout() {
+        // Cambiar el estado de isLogginedin a false para desloguear
+        isLogginedin = false
     }
 }
 
