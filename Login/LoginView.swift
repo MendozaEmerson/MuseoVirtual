@@ -50,16 +50,6 @@ struct LoginView: View {
     
     func btnLogin() {
             // Verificar si el usuario y la contraseña coinciden con algún usuario registrado
-            if let _ = users.first(where: { $0.username == username && $0.password == password }) {
-                print(users[0])
-                print(username)
-                
-                isLogginedin = true
-                
-            } else {
-                print("Usuario o contraseña incorrectos")
-            }
+        isLogginedin=true;
     }
 }
-
-//

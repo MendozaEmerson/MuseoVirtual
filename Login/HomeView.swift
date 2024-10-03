@@ -4,7 +4,6 @@
 //
 //  Created by epismac on 25/09/24.
 //
-
 import SwiftUI
 
 struct HomeView: View {
@@ -12,17 +11,31 @@ struct HomeView: View {
     @Binding var isLogginedin: Bool
     
     var body: some View {
-        VStack {
-            Text("Bienvenido al Inicio")
-                .font(.largeTitle)
+        NavigationView { // Agregar NavigationView
+            VStack {
+                Text("Bienvenido al Inicio")
+                    .font(.largeTitle)
+                    .padding()
+                
+                // Botón de Logout
+                Button("Logout") {
+                    btnLogout()
+                }
+                .buttonStyle(.borderedProminent)
                 .padding()
-
-            // Botón de Logout
-            Button("Logout") {
-                btnLogout()
+                
+                // Navegación a la vista de detalles
+                NavigationLink(destination: DetailView()) {
+                    Text("Ir a Detalles")
+                        .font(.headline)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
             }
-            .buttonStyle(.borderedProminent)
-            .padding()
+            .navigationTitle("Home") // Título de la barra de navegación
+            .navigationBarTitleDisplayMode(.inline) // Opciones de visualización del título
         }
     }
     
@@ -32,4 +45,13 @@ struct HomeView: View {
     }
 }
 
+// Vista de Detalles
+struct DetailView: View {
+    var body: some View {
+        Text("Vista de Detalles")
+            .font(.largeTitle)
+            .navigationTitle("Detalles")
+            .navigationBarTitleDisplayMode(.inline) // Opciones de visualización del título
+    }
+}
 
